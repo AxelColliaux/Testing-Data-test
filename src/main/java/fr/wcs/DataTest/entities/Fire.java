@@ -6,6 +6,8 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.validation.constraints.Min;
 
 @Entity
@@ -19,6 +21,10 @@ public class Fire {
     private int severity;
 
     private Instant date;
+
+    @ManyToOne
+    @JoinColumn(name = "fireman_id")
+    private Fireman fireman;
 
     public Fire(int severity, Instant date) {
         this.severity = severity;
@@ -50,6 +56,14 @@ public class Fire {
 
     public void setDate(Instant date) {
         this.date = date;
+    }
+
+    public Fireman getFireman() {
+        return fireman;
+    }
+    
+    public void setFireman(Fireman fireman) {
+        this.fireman = fireman;
     }
     
 }
